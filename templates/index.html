@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Business Homepage</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?business,success') no-repeat center center/cover;
+      height: 80vh;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+    }
+    .service-icon {
+      font-size: 3rem;
+      color: #0d6efd;
+    }
+    footer {
+      background-color: #343a40;
+      color: white;
+      padding: 20px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">MyBiz</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Empower Your Business</h1>
+      <p class="lead">Innovative solutions for modern problems</p>
+      <a href="#contact" class="btn btn-primary btn-lg mt-3">Get Started</a>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">Our Services</h2>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="service-icon mb-3">💻</div>
+          <h4>Web Development</h4>
+          <p>We craft responsive, SEO-optimized websites tailored for your brand.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon mb-3">📈</div>
+          <h4>Digital Marketing</h4>
+          <p>Grow your online presence and drive leads with expert digital strategies.</p>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="service-icon mb-3">📱</div>
+          <h4>App Development</h4>
+          <p>Custom mobile app solutions for Android and iOS platforms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="bg-light py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-4">
+          <img src="https://source.unsplash.com/800x600/?office,teamwork" class="img-fluid rounded" alt="About Us">
+        </div>
+        <div class="col-md-6">
+          <h2>About Us</h2>
+          <p>We are a team of passionate developers, designers, and strategists dedicated to delivering top-tier solutions for businesses across the globe.</p>
+          <p>With over 10 years of experience, we help businesses unlock their full potential using digital tools and technology.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5">What Our Clients Say</h2>
+      <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner text-center">
+          <div class="carousel-item active">
+            <blockquote class="blockquote">
+              <p>"MyBiz transformed our online presence completely. Highly recommended!"</p>
+              <footer class="blockquote-footer">Anita Sharma, CEO of ZenTech</footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>"Professional, prompt, and innovative. Will definitely work with them again."</p>
+              <footer class="blockquote-footer">Raj Malhotra, Founder of EduNet</footer>
+            </blockquote>
+          </div>
+          <div class="carousel-item">
+            <blockquote class="blockquote">
+              <p>"A reliable tech partner for our growth journey. Excellent service."</p>
+              <footer class="blockquote-footer">Sneha Iyer, Director at GreenStart</footer>
+            </blockquote>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center mb-4">Get In Touch</h2>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" placeholder="Your Full Name" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="you@example.com" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" placeholder="How can we help you?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2025 MyBiz. All rights reserved.</p>
+      <small>Built with ❤️ using Bootstrap 5</small>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
