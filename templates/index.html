@@ -45,6 +45,9 @@
           <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          {% if message %}
+          <li class="nav-item"><a class="nav-link" href="#">{{ message }}</a></li>
+          {% endif %}
         </ul>
       </div>
     </div>
@@ -53,8 +56,12 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="container">
-      <h1>Empower Your Business</h1>
-      <p class="lead">Innovative solutions for modern problems</p>
+      {% if user %}
+      <h1 class="text-dark">Welcome {{ user }}</h1>
+      {% else %}
+      <h1 class="text-dark">Welcome Guest!</h1>
+      {% endif %}
+      
       <a href="#contact" class="btn btn-primary btn-lg mt-3">Get Started</a>
     </div>
   </section>
