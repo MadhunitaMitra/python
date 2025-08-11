@@ -42,6 +42,15 @@ def signup():
         return render_template('register.html', message="User created successfully")
     return render_template('register.html')
 
+@app.route('/view')
+def view():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM students")
+    students = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template('view.html', students=students)
 
 if __name__ == '__main__':
     app.run(debug=True,port=5050)
