@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect,url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import mysql.connector
+# from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-
+app.secret_key = "ffdtrdbbftdwqwasviuhihiugcghctr"
 
 def get_db_connection():
     
@@ -15,35 +16,63 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    conn = get_db_connection()
-    if not conn:
-        message = "Database connection failed"
-    else:
-        message = "Database connection successful"
-    return render_template('index.html',message=message)
-
-@app.route('/about')
-def about():
-    name = "Madhunita"
-    return render_template('about.html', name=name)
+    return redirect(url_for('login'))
 
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if 'user' in session:
+        return redirect(url_for('view'))
     if request.method == 'POST':
         username = request.form['user']
         password = request.form['password']
+        # hashed_password = generate_password_hash(password)
+        # Check if user already exists
         conn = get_db_connection()
         cursor = conn.cursor()
+        cursor.execute("SELECT * FROM user WHERE username = %s", (username,))
+        user = cursor.fetchone()
+        if user:
+            return render_template('register.html', message="User already exists")
+        # Insert new user
         cursor.execute("INSERT INTO user (username, password) VALUES (%s, %s)", (username, password))
         conn.commit()
         cursor.close()
         conn.close()
-        return render_template('register.html', message="User created successfully")
+        return redirect(url_for('login'))
     return render_template('register.html')
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if 'user' in session:
+        return redirect(url_for('view'))
+    if request.method == 'POST':
+        username = request.form['user']
+        password = request.form['password']
+        conn = get_db_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM user WHERE username = %s", (username,))
+        user = cursor.fetchone()
+        cursor.close()
+        conn.close()
+        if user and user['password'] == password:
+            session['user'] = user['username']
+            session['user_id'] = user['id']
+            return redirect(url_for('view'))
+        else:
+            return render_template('login.html', message="Invalid username or password")
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    return redirect(url_for('login'))
 
 @app.route('/view')
 def view():
+    if 'user' not in session:
+        return redirect(url_for('login'))
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM students")
@@ -54,6 +83,8 @@ def view():
 
 @app.route('/delete/<int:id>')
 def delete(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("DELETE FROM students WHERE student_id = %s", (id,))
@@ -64,6 +95,8 @@ def delete(id):
 
 @app.route('/edit/<int:id>')
 def edit(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM students WHERE student_id = %s", (id,))
@@ -74,6 +107,8 @@ def edit(id):
 
 @app.route('/update/<int:id>', methods=['POST'])
 def update(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
     name = request.form['full_name']
     dob = request.form['dob']
     gender = request.form['gender']
@@ -91,6 +126,8 @@ def update(id):
 
 @app.route('/view/<int:id>')
 def view_student(id):
+    if 'user' not in session:
+        return redirect(url_for('login'))
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM students WHERE student_id = %s", (id,))
