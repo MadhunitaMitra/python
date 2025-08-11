@@ -16,8 +16,11 @@ def get_db_connection():
 
 @app.route('/')
 def home():
-    return redirect(url_for('login'))
+    return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
