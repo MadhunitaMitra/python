@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="container">
-    <div class="card">
+    <div class="card m-5 p-4">
         <table class="table">
         <thead>
             <tr>
@@ -19,18 +19,24 @@
             <th scope="col">Department</th>
             <th scope="col">Email</th>
             <th scope="col">Phone</th>
+            <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
             {% for student in students %}
             <tr>
-                <th scope="row">{{ student.student_id }}</th>
+                <th scope="row">{{ loop.index }}</th>
                 <td>{{ student.full_name }}</td>
                 <td>{{ student.dob }}</td>
                 <td>{{ student.gender }}</td>
                 <td>{{ student.department }}</td>
                 <td>{{ student.email }}</td>
                 <td>{{ student.phone }}</td>
+                <td>
+                    <a href="/delete/{{ student.student_id }}" class="btn btn-danger btn-sm">Delete</a>
+                    <a href="/edit/{{ student.student_id }}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="/view/{{ student.student_id }}" class="btn btn-secondary btn-sm">View</a>
+                </td>
             </tr>
             {% endfor %}
             {% if not students %}
